@@ -3,6 +3,7 @@ package CRUD;
 import POJO.Empleado;
 import Sandbox.HibernateUtil;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.HibernateError;
@@ -20,12 +21,12 @@ public class Select {
             transaction = session.beginTransaction();
 
             //Todos los registros
-            List<Object[]> empleados = session.createNativeQuery("SELECT * FROM EMPLEADOS").list();
+            List<Object[]> empleados = session.createNativeQuery("SELECT * FROM EMPLEADOS WHERE EMPLEADOS.SALARIO>12000").list();
             for (Object[] objects : empleados) {
                 Integer id = (Integer) objects[0];
                 String nombre = (String) objects[1];
                 String apellido = (String) objects[2];
-                Integer salario = (Integer) objects[5];
+                BigDecimal salario = (BigDecimal) objects[5];
                 System.out.println("Empleado [" + apellido + "," + nombre + "," + salario + "," +id + "]");
             }
             transaction.commit();

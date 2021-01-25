@@ -3,7 +3,7 @@ package POJO;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "DEPARTAMENTOS", schema = "TAREA3", catalog = "")
+@Table(name = "DEPARTAMENTOS", schema = "TAREA3")
 public class DepartamentosEntity {
     private Object id;
     private String nombre;
