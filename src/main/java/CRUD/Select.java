@@ -37,7 +37,11 @@ public class Select {
             Query queryAll = session.createQuery(query);
             List<Empleado> listaTodosEmpleado = queryAll.list();
             for (Empleado empleado : listaTodosEmpleado) {
-                System.out.println("POJO.Empleado [" + empleado.getId() + "," + empleado.getNombre() + "," + empleado.getApellidos()+ "," +empleado.getSalario() + "]");
+                System.out.println("POJO.Empleado ["
+                        + empleado.getId() + ","
+                        + empleado.getNombre() + ","
+                        + empleado.getApellidos()+ ","
+                        + empleado.getSalario() + "]");
             }
             transaction.commit();
         } catch (Exception e) {
@@ -71,7 +75,11 @@ public class Select {
             List<Empleado> listaTodosEmpleado = queryAll.list();
             for (Empleado empleado : listaTodosEmpleado) {
                 if(empleado.getSalario().compareTo(salarioMinimo)==-1){
-                    System.out.println("POJO.Empleado [" + empleado.getId() + "," + empleado.getNombre() + "," + empleado.getApellidos()+ "," +empleado.getSalario() + "]");
+                    System.out.println("POJO.Empleado ["
+                            + empleado.getId() + ","
+                            + empleado.getNombre() + ","
+                            + empleado.getApellidos()+ ","
+                            + empleado.getSalario() + "]");
                 }
             }
             transaction.commit();
@@ -102,7 +110,12 @@ public class Select {
             Query queryAll = session.createQuery(query);
             List<Empleado> listaTodosEmpleado = queryAll.list();
             for (Empleado empleado : listaTodosEmpleado) {
-                System.out.println("Empleado [" + empleado.getId() + "," + empleado.getNombre() + "," + empleado.getApellidos() + "," +empleado.getSalario() + "," + empleado.getDepartamento().getNombre() + "]");
+                System.out.println("Empleado ["
+                        + empleado.getId() + ","
+                        + empleado.getNombre() + ","
+                        + empleado.getApellidos() + ","
+                        + empleado.getSalario() + ","
+                        + empleado.getDepartamento().getNombre() + "]");
             }
             transaction.commit();
         } catch (Exception e) {
@@ -136,7 +149,13 @@ public class Select {
             List<Empleado> listaTodosEmpleado = queryAll.list();
             for (Empleado empleado : listaTodosEmpleado) {
                 if(!empleado.getDepartamento().getLocalizacion().equals("MADRID")){
-                    System.out.println("Empleado [" + empleado.getId() + "," + empleado.getNombre() + "," + empleado.getApellidos() + "," +empleado.getSalario() + "," + empleado.getDepartamento().getNombre() + "," + empleado.getDepartamento().getLocalizacion() +"]");
+                    System.out.println("Empleado ["
+                            + empleado.getId() + ","
+                            + empleado.getNombre() + ","
+                            + empleado.getApellidos() + ","
+                            + empleado.getSalario() + ","
+                            + empleado.getDepartamento().getNombre() + ","
+                            + empleado.getDepartamento().getLocalizacion() +"]");
                 }
             }
             transaction.commit();
@@ -166,7 +185,10 @@ public class Select {
             List<Empleado> listaTodosEmpleado = queryAll.list();
             for (Empleado empleado : listaTodosEmpleado) {
 
-                System.out.println("Empleado [" + empleado.getApellidos() + "," +empleado.getSalario() + "," + empleado.getDepartamento().getId() + "]");
+                System.out.println("Empleado ["
+                        + empleado.getApellidos() + ","
+                        + empleado.getSalario() + ","
+                        + empleado.getDepartamento().getId() + "]");
             }
             transaction.commit();
         } catch (Exception e) {
@@ -195,7 +217,10 @@ public class Select {
             List<Empleado> listaTodosEmpleado = queryAll.list();
             for (Empleado empleado : listaTodosEmpleado) {
 
-                System.out.println("Empleado [" + empleado.getNombre() + "," + empleado.getApellidos() + "," +empleado.getSalario() + "]");
+                System.out.println("Empleado ["
+                        + empleado.getNombre() + ","
+                        + empleado.getApellidos() + ","
+                        + empleado.getSalario() + "]");
             }
             transaction.commit();
         } catch (Exception e) {
