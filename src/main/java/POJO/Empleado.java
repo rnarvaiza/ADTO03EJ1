@@ -7,22 +7,22 @@ import java.sql.Date;
 @Entity
 @Table(name = "EMPLEADOS", schema = "TAREA3")
 public class Empleado {
-    private Object id;
+    private int id;
     private String nombre;
     private String apellidos;
     private String puesto;
     private Date fechaAlta;
     private BigDecimal salario;
     private BigDecimal comision;
-    private Object idDepartamento;
+    private int idDepartamento;
 
     @Id
     @Column(name = "ID")
-    public Object getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Object id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -47,26 +47,6 @@ public class Empleado {
     }
 
     @Basic
-    @Column(name = "PUESTO")
-    public String getPuesto() {
-        return puesto;
-    }
-
-    public void setPuesto(String puesto) {
-        this.puesto = puesto;
-    }
-
-    @Basic
-    @Column(name = "FECHA_ALTA")
-    public Date getFechaAlta() {
-        return fechaAlta;
-    }
-
-    public void setFechaAlta(Date fechaAlta) {
-        this.fechaAlta = fechaAlta;
-    }
-
-    @Basic
     @Column(name = "SALARIO")
     public BigDecimal getSalario() {
         return salario;
@@ -77,25 +57,15 @@ public class Empleado {
     }
 
     @Basic
-    @Column(name = "COMISION")
-    public BigDecimal getComision() {
-        return comision;
-    }
-
-    public void setComision(BigDecimal comision) {
-        this.comision = comision;
-    }
-
-    @Basic
     @Column(name = "ID_DEPARTAMENTO")
-    public Object getIdDepartamento() {
+    public int getIdDepartamento() {
         return idDepartamento;
     }
 
-    public void setIdDepartamento(Object idDepartamento) {
+    public void setIdDepartamento(int idDepartamento) {
         this.idDepartamento = idDepartamento;
     }
-
+/*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -128,4 +98,6 @@ public class Empleado {
         result = 31 * result + (idDepartamento != null ? idDepartamento.hashCode() : 0);
         return result;
     }
+
+ */
 }
