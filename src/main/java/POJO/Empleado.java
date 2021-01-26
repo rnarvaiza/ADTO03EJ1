@@ -1,33 +1,73 @@
 package POJO;
 
+import POJO.Departamento;
+
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.sql.Date;
+import java.math.BigInteger;
+import java.util.Date;
 
 @Entity
-@Table(name = "EMPLEADOS", schema = "TAREA3")
+@Table (name = "EMPLEADOS")
 public class Empleado {
-    private int id;
-    private String nombre;
-    private String apellidos;
-    private String puesto;
-    private Date fechaAlta;
-    private BigDecimal salario;
-    private BigDecimal comision;
-    private int idDepartamento;
 
     @Id
-    @Column(name = "ID")
-    public int getId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column (name="ID", nullable = false)
+    private BigInteger id;
+
+    @Column (name="NOMBRE")
+    private String nombre;
+
+    @Column (name="APELLIDOS")
+    private String apellidos;
+
+    @Column (name="PUESTO")
+    private String puesto;
+
+    @Column (name="FECHA_ALTA")
+    private Date fechaAlta;
+
+    @Column (name="SALARIO")
+    private Float salario;
+
+    @Column (name="COMISION")
+    private Float comision;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_DEPARTAMENTO", nullable = false)
+    private Departamento departamento;
+
+    public Empleado(){
+
+    }
+
+    public Empleado(String nombre, String apellidos, String puesto, Date fechaAlta, Float salario, Float comision, Departamento departamento) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.puesto = puesto;
+        this.fechaAlta = fechaAlta;
+        this.salario = salario;
+        this.comision = comision;
+        this.departamento = departamento;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "NOMBRE")
     public String getNombre() {
         return nombre;
     }
@@ -36,8 +76,6 @@ public class Empleado {
         this.nombre = nombre;
     }
 
-    @Basic
-    @Column(name = "APELLIDOS")
     public String getApellidos() {
         return apellidos;
     }
@@ -46,58 +84,48 @@ public class Empleado {
         this.apellidos = apellidos;
     }
 
-    @Basic
-    @Column(name = "SALARIO")
-    public BigDecimal getSalario() {
+    public String getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
+    }
+
+    public Date getFechaAlta() {
+        return fechaAlta;
+    }
+
+    public void setFechaAlta(Date fechaAlta) {
+        this.fechaAlta = fechaAlta;
+    }
+
+    public Float getSalario() {
         return salario;
     }
 
-    public void setSalario(BigDecimal salario) {
+    public void setSalario(Float salario) {
         this.salario = salario;
     }
 
-    @Basic
-    @Column(name = "ID_DEPARTAMENTO")
-    public int getIdDepartamento() {
-        return idDepartamento;
+    public Float getComision() {
+        return comision;
     }
 
-    public void setIdDepartamento(int idDepartamento) {
-        this.idDepartamento = idDepartamento;
-    }
-/*
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Empleado that = (Empleado) o;
-
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (nombre != null ? !nombre.equals(that.nombre) : that.nombre != null) return false;
-        if (apellidos != null ? !apellidos.equals(that.apellidos) : that.apellidos != null) return false;
-        if (puesto != null ? !puesto.equals(that.puesto) : that.puesto != null) return false;
-        if (fechaAlta != null ? !fechaAlta.equals(that.fechaAlta) : that.fechaAlta != null) return false;
-        if (salario != null ? !salario.equals(that.salario) : that.salario != null) return false;
-        if (comision != null ? !comision.equals(that.comision) : that.comision != null) return false;
-        if (idDepartamento != null ? !idDepartamento.equals(that.idDepartamento) : that.idDepartamento != null)
-            return false;
-
-        return true;
+    public void setComision(Float comision) {
+        this.comision = comision;
     }
 
     @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (nombre != null ? nombre.hashCode() : 0);
-        result = 31 * result + (apellidos != null ? apellidos.hashCode() : 0);
-        result = 31 * result + (puesto != null ? puesto.hashCode() : 0);
-        result = 31 * result + (fechaAlta != null ? fechaAlta.hashCode() : 0);
-        result = 31 * result + (salario != null ? salario.hashCode() : 0);
-        result = 31 * result + (comision != null ? comision.hashCode() : 0);
-        result = 31 * result + (idDepartamento != null ? idDepartamento.hashCode() : 0);
-        return result;
+    public String toString() {
+        return "POJO.Empleado{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", puesto='" + puesto + '\'' +
+                ", fechaAlta=" + fechaAlta +
+                ", salario=" + salario +
+                ", comision=" + comision +
+                '}';
     }
-
- */
 }
