@@ -118,7 +118,7 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return "POJO.Empleado{" +
+        return "Empleado{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
@@ -126,6 +126,7 @@ public class Empleado {
                 ", fechaAlta=" + fechaAlta +
                 ", salario=" + salario +
                 ", comision=" + comision +
+                ", departamento=" + departamento +
                 '}';
     }
 }

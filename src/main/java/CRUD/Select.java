@@ -1,8 +1,7 @@
 package CRUD;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.math.BigInteger;
+import java.util.*;
 
 import POJO.Departamento;
 import POJO.Empleado;
@@ -232,7 +231,6 @@ public class Select {
         }
         HibernateUtil.shutdown();
     }
-
     /**
      * Consultas mediante HQL.
      * Mostrar nombre y total de empleados de aquellos departamentos con más de un empleado adscrito. Ordena el resultado por número de empleado.
@@ -242,19 +240,22 @@ public class Select {
     public static void select6(String query1, String query2){
         Session session = null;
         Transaction transaction = null;
-        Map<Integer, Empleado> mapaEmpleados = new HashMap<>();
-        int departamentos[] = new int[6];
-        Empleado empleado = new Empleado();
+        List<Departamento> listadoDepartamentos = null;
+        List<Empleado> listadoEmpleados =  null;
+        HashMap<BigInteger, Integer> idDepartamentoCantidadEmpleadosMap = new HashMap<>();
+        Map<BigInteger, Integer> sorted=null;
+        int numeroDeEmpleados=0;
+
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Query queryAll = session.createQuery(query1);
-            List<Departamento> listadoDepartamentos = queryAll.list();
-            for (Departamento departamento : listadoDepartamentos) {
-                mapaEmpleados.put(departamento.getId().intValue(),empleado);
+            listadoDepartamentos = queryAll.list();
 
+            if(!listadoDepartamentos.isEmpty()){
+                System.out.println("Almacenado el listado de departamentos. El listado tiene: " + listadoDepartamentos.size() + " elementos");
+                System.out.println(listadoDepartamentos);
             }
-            System.out.println(mapaEmpleados.toString());
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -267,17 +268,10 @@ public class Select {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Query queryAll = session.createQuery(query2);
-            int counter = 1;
-            int counterEmpleados =0;
-            List<Empleado> listadoEmpleados = queryAll.list();
-            for (Empleado empleado1 : listadoEmpleados) {
-                if (empleado1.getDepartamento().getId().equals(mapaEmpleados.get(counter))){
-                    mapaEmpleados.put(counter, empleado1);
-                    counter++;
-
-                }
+            listadoEmpleados = queryAll.list();
+            if(!listadoEmpleados.isEmpty()){
+                System.out.println("Almacenado el listado de empleados. El listado tiene: " + listadoEmpleados.size() + " elementos");
             }
-            System.out.println(mapaEmpleados.toString());
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -287,6 +281,44 @@ public class Select {
             }
         }
         HibernateUtil.shutdown();
+
+        for(Departamento departamento:listadoDepartamentos){
+            for(Empleado empleado:listadoEmpleados){
+                if(departamento.getId().compareTo(empleado.getDepartamento().getId())==0){
+                    numeroDeEmpleados++;
+                }
+            }
+            if(numeroDeEmpleados > 1){
+                idDepartamentoCantidadEmpleadosMap.put(departamento.getId(),numeroDeEmpleados);
+            }
+            numeroDeEmpleados=0;
+        }
+        sorted = sortValues(idDepartamentoCantidadEmpleadosMap);
+        Set set = sorted.entrySet();
+        Iterator iterator = set.iterator();
+        while (iterator.hasNext()){
+
+            Map.Entry me = (Map.Entry)iterator.next();
+                System.out.println("Departamento: " + listadoDepartamentos.get((int)me.getKey()).getNombre() + " tiene " + me.getValue() + " empleados.");
+        }
+    }
+
+    private static HashMap sortValues(HashMap map) {
+        List list = new LinkedList(map.entrySet());
+
+        Collections.sort(list, new Comparator(){
+
+            @Override
+            public int compare(Object o1, Object o2) {
+                return ((Comparable) ((Map.Entry)(o1)).getValue()).compareTo(((Map.Entry)(o2)).getValue());
+            }
+        });
+        HashMap sortedHashMap = new LinkedHashMap();
+        for (Iterator it = list.iterator(); it.hasNext();){
+            Map.Entry entry = (Map.Entry) it.next();
+            sortedHashMap.put(entry.getKey(), entry.getValue());
+        }
+        return sortedHashMap;
     }
 
 }
