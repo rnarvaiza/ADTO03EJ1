@@ -5,7 +5,6 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import POJO.*;
 
 public class HibernateUtil {
 
@@ -44,6 +43,7 @@ public class HibernateUtil {
     public static void shutdown() {
         if (registry != null) {
             StandardServiceRegistryBuilder.destroy(registry);
+
         }
     }
 }

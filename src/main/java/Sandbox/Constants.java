@@ -2,7 +2,7 @@ package Sandbox;
 
 public class Constants {
 
-    public static final String QUERY_SELECT_AP1 = "from Empleado e where e.salario<12000";
+    public static final String QUERY_SELECT_AP1 = "from Empleado";
     public static final String QUERY_SELECT_AP2 = "from Empleado e order by e.salario asc";
     public static final String QUERY_SELECT_AP3 = "from Empleado";
     public static final String QUERY_SELECT_AP4 = "from Empleado where salario>(select max(salario) from Empleado e where e.departamento.id=1)";

@@ -7,7 +7,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ADTO03EJ1" />
-        <module name="MAPEOCLASEAD" />
         <module name="AD03_Activ1_NarvaizaMunguiaRafael" />
       </profile>
     </annotationProcessing>

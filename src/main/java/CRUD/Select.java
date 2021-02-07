@@ -3,8 +3,8 @@ package CRUD;
 import java.math.BigInteger;
 import java.util.*;
 
-import POJO.Departamento;
-import POJO.Empleado;
+import Sandbox.Departamento;
+import Sandbox.Empleado;
 import Sandbox.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -28,69 +28,26 @@ public class Select {
      */
 
     public static void select1(String query){
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            Query queryAll = session.createQuery(query);
-            List<Empleado> listaTodosEmpleado = queryAll.list();
-            for (Empleado empleado : listaTodosEmpleado) {
-                System.out.println("POJO.Empleado ["
-                        + empleado.getId() + ","
-                        + empleado.getNombre() + ","
-                        + empleado.getApellidos()+ ","
-                        + empleado.getSalario() + "]");
-            }
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-
-        HibernateUtil.shutdown();
-
-    }
-
-    /**
-     * Alternativa al select anterior.
-     * En vez de comprobar la condición por HQL lo realizamos en java con el operador .compareTo entre dos BigDecimals, el del salario en sí y
-     * otra instancia del objeto con valor del salario mileurista.
-     * Tomamos los salarios como anuales y definimos el salario en 12000.
-     */
-
-    public static void queryHQLAlternativa() {
-        Session session = null;
-        Transaction transaction = null;
-        float salarioMinimo = 12000f;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-
-            Query queryAll = session.createQuery("from Empleado");
-            List<Empleado> listaTodosEmpleado = queryAll.list();
-            for (Empleado empleado : listaTodosEmpleado) {
+        List<Empleado> resultado;
+        try{
+            float salarioMinimo = 120000f;
+            resultado=getListOfEmpleadosFromDB(query);
+            for (Empleado empleado : resultado) {
                 if(empleado.getSalario().compareTo(salarioMinimo)==-1){
-                    System.out.println("POJO.Empleado ["
+                    System.out.println("Empleado ["
                             + empleado.getId() + ","
                             + empleado.getNombre() + ","
                             + empleado.getApellidos()+ ","
                             + empleado.getSalario() + "]");
                 }
             }
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+        }catch (NullPointerException ne){
+            System.out.println(ne.getMessage());
         }
 
-        HibernateUtil.shutdown();
+       // HibernateUtil.shutdown();
+
+
     }
 
     /**
@@ -101,30 +58,17 @@ public class Select {
      */
 
     public static void select2(String query){
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            Query queryAll = session.createQuery(query);
-            List<Empleado> listaTodosEmpleado = queryAll.list();
-            for (Empleado empleado : listaTodosEmpleado) {
-                System.out.println("Empleado ["
-                        + empleado.getId() + ","
-                        + empleado.getNombre() + ","
-                        + empleado.getApellidos() + ","
-                        + empleado.getSalario() + ","
-                        + empleado.getDepartamento().getNombre() + "]");
-            }
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+        List<Empleado> resultado;
+        resultado=getListOfEmpleadosFromDB(query);
+        for (Empleado empleado : resultado) {
+            System.out.println("Empleado ["
+                    + empleado.getId() + ","
+                    + empleado.getNombre() + ","
+                    + empleado.getApellidos() + ","
+                    + empleado.getSalario() + ","
+                    + empleado.getDepartamento().getNombre() + "]");
         }
-        HibernateUtil.shutdown();
+
     }
 
 
@@ -139,33 +83,20 @@ public class Select {
      */
 
     public static void select3(String query){
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            Query queryAll = session.createQuery(query);
-            List<Empleado> listaTodosEmpleado = queryAll.list();
-            for (Empleado empleado : listaTodosEmpleado) {
-                if(!empleado.getDepartamento().getLocalizacion().equals("MADRID")){
-                    System.out.println("Empleado ["
-                            + empleado.getId() + ","
-                            + empleado.getNombre() + ","
-                            + empleado.getApellidos() + ","
-                            + empleado.getSalario() + ","
-                            + empleado.getDepartamento().getNombre() + ","
-                            + empleado.getDepartamento().getLocalizacion() +"]");
-                }
-            }
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
+
+        List<Empleado> resultado;
+        resultado=getListOfEmpleadosFromDB(query);
+        for (Empleado empleado : resultado) {
+            if(!empleado.getDepartamento().getLocalizacion().equals("MADRID")){
+                System.out.println("Empleado ["
+                        + empleado.getId() + ","
+                        + empleado.getNombre() + ","
+                        + empleado.getApellidos() + ","
+                        + empleado.getSalario() + ","
+                        + empleado.getDepartamento().getNombre() + ","
+                        + empleado.getDepartamento().getLocalizacion() +"]");
             }
         }
-        HibernateUtil.shutdown();
     }
 
     /**
@@ -175,29 +106,17 @@ public class Select {
      */
 
     public static void select4(String query){
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            Query queryAll = session.createQuery(query);
-            List<Empleado> listaTodosEmpleado = queryAll.list();
-            for (Empleado empleado : listaTodosEmpleado) {
 
-                System.out.println("Empleado ["
-                        + empleado.getApellidos() + ","
-                        + empleado.getSalario() + ","
-                        + empleado.getDepartamento().getId() + "]");
-            }
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+        List<Empleado> resultado;
+        resultado=getListOfEmpleadosFromDB(query);
+
+        for (Empleado empleado : resultado) {
+            System.out.println("Empleado ["
+                    + empleado.getApellidos() + ","
+                    + empleado.getSalario() + ","
+                    + empleado.getDepartamento().getId() + "]");
         }
-        HibernateUtil.shutdown();
+
     }
 
     /**
@@ -207,29 +126,17 @@ public class Select {
      */
 
     public static void select5(String query){
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            Query queryAll = session.createQuery(query);
-            List<Empleado> listaTodosEmpleado = queryAll.list();
-            for (Empleado empleado : listaTodosEmpleado) {
 
-                System.out.println("Empleado ["
-                        + empleado.getNombre() + ","
-                        + empleado.getApellidos() + ","
-                        + empleado.getSalario() + "]");
-            }
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+        List<Empleado> resultado;
+        resultado=getListOfEmpleadosFromDB(query);
+
+        for (Empleado empleado : resultado) {
+
+            System.out.println("Empleado ["
+                    + empleado.getNombre() + ","
+                    + empleado.getApellidos() + ","
+                    + empleado.getSalario() + "]");
         }
-        HibernateUtil.shutdown();
     }
     /**
      * Consultas mediante HQL.
@@ -246,31 +153,22 @@ public class Select {
         Map<BigInteger, Integer> sorted=null;
         int numeroDeEmpleados=0;
 
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            Query queryAll = session.createQuery(query1);
-            listadoDepartamentos = queryAll.list();
 
-            if(!listadoDepartamentos.isEmpty()){
-                System.out.println("Almacenado el listado de departamentos. El listado tiene: " + listadoDepartamentos.size() + " elementos");
-                System.out.println(listadoDepartamentos);
-            }
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Query queryAll = session.createQuery(query2);
-            listadoEmpleados = queryAll.list();
-            if(!listadoEmpleados.isEmpty()){
-                System.out.println("Almacenado el listado de empleados. El listado tiene: " + listadoEmpleados.size() + " elementos");
+            Query queryAllDept = session.createQuery(query1);
+            listadoDepartamentos = queryAllDept.list();
+
+            if(listadoDepartamentos.isEmpty()){
+                System.out.println("El listado departamentos está vacio.");
+            }
+
+            Query queryAllEmp = session.createQuery(query2);
+            listadoEmpleados = queryAllEmp.list();
+            if(listadoEmpleados.isEmpty()){
+                System.out.println("El listado departamentos está vacio.");
+
             }
             transaction.commit();
         } catch (Exception e) {
@@ -280,7 +178,13 @@ public class Select {
                 session.close();
             }
         }
-        HibernateUtil.shutdown();
+        //HibernateUtil.shutdown();
+
+        /**
+         * Procedemos a recorrer todos los departamentos.
+         * Dentro de cada bucle de departamento, utilizamos otro bucle para recorrer los diversos objetos Empleado.
+         * Siempre que haya más de un empleado con el mismo departamento, lo añadimos al map idDepartamentoCantidadEmpleadosMap.
+         */
 
         for(Departamento departamento:listadoDepartamentos){
             for(Empleado empleado:listadoEmpleados){
@@ -293,32 +197,69 @@ public class Select {
             }
             numeroDeEmpleados=0;
         }
-        sorted = sortValues(idDepartamentoCantidadEmpleadosMap);
-        Set set = sorted.entrySet();
-        Iterator iterator = set.iterator();
-        while (iterator.hasNext()){
 
-            Map.Entry me = (Map.Entry)iterator.next();
-                System.out.println("Departamento: " + listadoDepartamentos.get((int)me.getKey()).getNombre() + " tiene " + me.getValue() + " empleados.");
+        /**
+         * Una vez tenemos un hashamp con los resultados ordenados de la forma que queremos, procedemos a recorrerlo con un bucle.
+         * Dentro de cada iteración del bucle del HashMap, procedemos a recorrer el listado de todos los departamentos.
+         * Cuando el entryset del HashMap nos devuelve un valor de key, buscamos dentro del listado de departamentos a que departamento pertenece.
+         * Simplemente nos queda sacar por pantalla el nombre de ese departamento y la cantidad de empleados, que va directamente en el value del HashMap.
+         */
+
+        sorted = sortValues(idDepartamentoCantidadEmpleadosMap);
+        for (Map.Entry<BigInteger, Integer> entry : sorted.entrySet()){
+            for(Departamento departamento:listadoDepartamentos){
+                if(entry.getKey()==departamento.getId()){
+                    System.out.println("Departamento : " + departamento.getNombre() + " tiene: " + entry.getValue() + " empleados");
+                }
+            }
         }
+
     }
 
+    /**
+     * El siguiente método nos va ordenar un Map. El Map contiene un BigInt con el ID del departamento por un lado, y un int con la cantidad de empleados por otro.
+     * Para su ordenación de MAYOR A MENOR, comparamos primero el o2 contra el o1. Si deseásemos que el orden fuese creciente, sería necesario
+     * cambiar el orden de o1 por o2.
+     * @param map
+     * @return
+     */
     private static HashMap sortValues(HashMap map) {
         List list = new LinkedList(map.entrySet());
 
-        Collections.sort(list, new Comparator(){
-
-            @Override
-            public int compare(Object o1, Object o2) {
-                return ((Comparable) ((Map.Entry)(o1)).getValue()).compareTo(((Map.Entry)(o2)).getValue());
-            }
-        });
+        Collections.sort(list, (Comparator) (o1, o2) -> ((Comparable) ((Map.Entry)(o2)).getValue()).compareTo(((Map.Entry)(o1)).getValue()));
         HashMap sortedHashMap = new LinkedHashMap();
         for (Iterator it = list.iterator(); it.hasNext();){
             Map.Entry entry = (Map.Entry) it.next();
             sortedHashMap.put(entry.getKey(), entry.getValue());
         }
         return sortedHashMap;
+    }
+
+    public static List getListOfEmpleadosFromDB(String query){
+        Session session = null;
+        Transaction transaction;
+        List<Empleado> list = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Query queryAllEmp = session.createQuery(query);
+            list = queryAllEmp.list();
+            if(list.isEmpty()){
+                System.out.println("El listado empleados está vacio.");
+
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        //HibernateUtil.shutdown();
+
+        return list;
     }
 
 }

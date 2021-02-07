@@ -4,9 +4,9 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://vps456458.ovh.net:3306/TAREA3</property>
+        <property name="connection.url">jdbc:mysql://10.242.27.110:3306/TAREA3</property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.username">semi</property>
-        <property name="connection.password">ivAGg7Ll</property>
+        <property name="connection.username">rnarvaiza</property>
+        <property name="connection.password">032699aA$</property>
     </session-factory>
 </hibernate-configuration>

@@ -1,4 +1,4 @@
-package POJO;
+package Sandbox;
 
 import javax.persistence.*;
 import java.math.BigInteger;

@@ -1,6 +1,5 @@
-package POJO;
+package Sandbox;
 
-import POJO.Departamento;
 
 import javax.persistence.*;
 import java.math.BigInteger;
