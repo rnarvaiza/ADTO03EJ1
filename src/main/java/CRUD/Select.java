@@ -3,8 +3,8 @@ package CRUD;
 import java.math.BigInteger;
 import java.util.*;
 
-import Sandbox.Departamento;
-import Sandbox.Empleado;
+import POJO.Departamento;
+import POJO.Empleado;
 import Sandbox.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

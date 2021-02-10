@@ -1,5 +1,8 @@
 package Sandbox;
 
+import POJO.Departamento;
+import POJO.Empleado;
+import POJO.Proyecto;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -23,6 +26,7 @@ public class HibernateUtil {
                 MetadataSources sources = new MetadataSources(registry);
                 sources.addAnnotatedClass(Empleado.class);
                 sources.addAnnotatedClass(Departamento.class);
+                sources.addAnnotatedClass(Proyecto.class);
 
                 // Crear Metadata
                 Metadata metadata = sources.getMetadataBuilder().build();

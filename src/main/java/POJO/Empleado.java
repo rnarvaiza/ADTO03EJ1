@@ -1,4 +1,4 @@
-package Sandbox;
+package POJO;
 
 
 import javax.persistence.*;
@@ -49,6 +49,10 @@ public class Empleado {
         this.salario = salario;
         this.comision = comision;
         this.departamento = departamento;
+    }
+
+    public Empleado (String nombre, String apellidos, Date fechaAlta, Float salario, Departamento departamento){
+
     }
 
     public Departamento getDepartamento() {

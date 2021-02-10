@@ -1,4 +1,4 @@
-package Sandbox;
+package POJO;
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -21,7 +21,7 @@ public class Departamento {
     private String localizacion;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Empleado> empleados;
+    private Set<Proyecto> proyectos;
 
     public Departamento() {
 
