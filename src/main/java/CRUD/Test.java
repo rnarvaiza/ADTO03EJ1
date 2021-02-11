@@ -5,10 +5,24 @@ import Sandbox.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-
 import java.util.List;
+/**
+ *
+ * @author
+ * Rafa Narvaiza
+ * ADTO03
+ *
+ * Métodos para testear el nuevo mapeo de tablas.
+ */
 
 public class Test {
+
+    /**
+     * Mostrar el contenido de cada tabla
+     * @param query1    empleado
+     * @param query2    departamento
+     * @param query3    proyecto
+     */
 
     public static void test1(String query1, String query2,String query3){
         Session session = null;
@@ -46,8 +60,12 @@ public class Test {
                 session.close();
             }
         }
-        // HibernateUtil.shutdown();
     }
+
+    /**
+     * Método para mostrar para cada empleado, su nombre, ID y nombre del departamento en el que trabaja.
+     * @param query
+     */
 
     public static void test2(String query){
         List <Empleado> getList = null;
@@ -62,9 +80,12 @@ public class Test {
                     + " y cobra: "
                     + empleado.getSalario());
         }
-
-        //HibernateUtil.shutdown();
     }
+
+    /**
+     * Nombre de cada proyecto y nombre del departamento que lo controla.
+     * @param query
+     */
 
     public static void test3(String query){
         Session session = null;

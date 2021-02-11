@@ -1,7 +1,15 @@
 package POJO;
 
 import javax.persistence.*;
-import java.math.BigInteger;
+
+/**
+ *
+ * @author
+ * Rafa Narvaiza
+ * ADTO03
+ *
+ * POJO declarando el objeto Proyecto
+ */
 
 
 @Entity

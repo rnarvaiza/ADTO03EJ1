@@ -1,9 +1,17 @@
 package POJO;
 
-
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Date;
+
+/**
+ *
+ * @author
+ * Rafa Narvaiza
+ * ADTO03
+ *
+ * POJO declarando el objeto Empleado
+ */
 
 @Entity
 @Table (name = "EMPLEADOS")

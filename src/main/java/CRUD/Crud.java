@@ -1,21 +1,33 @@
 package CRUD;
 
-import POJO.Departamento;
-import POJO.Empleado;
-import POJO.Proyecto;
+import POJO.*;
 import Sandbox.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-
 import java.math.BigInteger;
 import java.util.*;
+
+/**
+ *
+ * @author
+ * Rafa Narvaiza
+ * ADTO03
+ *
+ * Métodos para realizar la segunda parte de los ejercicios.
+ */
 
 public class Crud {
     public static Session session = null;
     public static Transaction transaction = null;
     public static Date todayDate = Calendar.getInstance().getTime();
+
+
+    /**
+     * Inserción de un nuevo objeto empleado llamado Antonio Negro, con el puesto de técnico, fecha de ingreso del día actual, salario de 3000€,
+     * comisión del 20% en el Departamento con ID 1.
+     */
 
     public static void insertaEmpleado(){
         try{
@@ -33,6 +45,10 @@ public class Crud {
         }
     }
 
+    /**
+     * Actualización del sueldo de un empleado determinado (ID 34).
+     */
+
     public static void actualizaEmpleado(){
 
         BigInteger idEmpleado = BigInteger.valueOf(34);
@@ -48,6 +64,12 @@ public class Crud {
         }
     }
 
+    /**
+     * Eliminación de un empleado determinado.
+     * En este caso en la llamada al método pasamos por parámetro el ID del empleado que queremos eliminar.
+     * @param IDEmpleadoEliminado
+     */
+
     public static void eliminaEmpleado(BigInteger IDEmpleadoEliminado){
         try{
             session = HibernateUtil.getSessionFactory().openSession();
@@ -61,6 +83,11 @@ public class Crud {
         }
     }
 
+
+    /**
+     * Consulta de los empleados con salario superior a 50.000€.
+     * @param query
+     */
     public static void consultaSalarios(String query){
         List<Empleado> getList = null;
         getList=Test.getListOfEmpleadosFromDB(query);
@@ -73,6 +100,13 @@ public class Crud {
                     + empleado.getSalario());
         }
     }
+
+    /**
+     * Método que nos va a mostrar los departamentos y que proyecto gestionan. Después,
+     * mostrará los departamentos que no gestionan ningún proyecto.
+     * @param query1
+     * @param query2
+     */
 
     public static void consultaDepartamentos(String query1, String query2){
         Session session = null;

@@ -12,7 +12,10 @@ import org.hibernate.query.Query;
 
 
 /**
- * @author rnarvaiza
+ *
+ * @author
+ * Rafa Narvaiza
+ *
  * ADTO03
  */
 

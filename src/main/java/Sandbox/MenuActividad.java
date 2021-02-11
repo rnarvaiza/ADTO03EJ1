@@ -1,16 +1,23 @@
 package Sandbox;
-
-import CRUD.Select;
-import CRUD.Test;
-
+import CRUD.*;
+import java.math.BigInteger;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+/**
+ * @author
+ * Rafa Narvaiza
+ * ADTO03
+ * Esta clase implementa un menú por consola para ir ejecutando los ejercicios propuestos.
+ */
 
-public class MenuActividad1 {
+public class MenuActividad {
     public static void showMenu() {
         Scanner scanner = new Scanner(System.in);
+        Scanner scannerForBigInts = new Scanner(System.in);
         boolean continuar = true;
-        int opcion, numero;
+        int opcion;
+        int empleadoEliminado;
+        BigInteger IDEmpleadoEliminado;
 
 
         while (continuar){
@@ -31,12 +38,16 @@ public class MenuActividad1 {
             System.out.println("7.- Seleccione 7 para consulta: Mostrar el contenido de cada Clase (tabla).");
             System.out.println("8.- Seleccione 8 para consulta: Mostrar para cada empleado, su departamento y donde está situado.");
             System.out.println("9.- Seleccione 9 para consulta: Mostrar para cada proyecto su nombre y el nombre del departamento que lo gestiona.");
+            System.out.println("##############################################################################################################################");
+            System.out.println("######################################################    APARTADO 2   #######################################################");
+            System.out.println("######################################################    ENUNCIADOS   #######################################################");
+            System.out.println("##############################################################################################################################");
             System.out.println("10.- Seleccione 10 para insertar un nuevo objeto empleado.");
-            System.out.println("11.- Seleccione ");
-            System.out.println("12.- Seleccione ");
-            System.out.println("13.- Seleccione ");
-            System.out.println("14.- Seleccione ");
-            System.out.println("15.- Seleccione 12 para salir del programa.");
+            System.out.println("11.- Seleccione 11 para modificar el salario de un objeto Empleados de la BD (empleado 34, con los nuevos valores 2200).");
+            System.out.println("12.- Seleccione 12 para eliminar un empleado.A continuación introduzca el ID del empleado que quiere eliminar:");
+            System.out.println("13.- Seleccione 13 para consulta de empleados con salario superior a 50000 €:");
+            System.out.println("14.- Seleccione 14 para mostrar el listado donde aparezcan los datos de cada departamento y a continuación los datos de los proyectos que controla. En el listado deben aparecer también los departamentos que no controlen proyectos.");
+            System.out.println("15.- Seleccione 15 para salir del programa.");
             System.out.println("Introduzca una opción:");
             try{
                 opcion = scanner.nextInt();
@@ -69,19 +80,22 @@ public class MenuActividad1 {
                         Test.test3(Constants.QUERY_SELECT_AP7);
                         break;
                     case 10:
-                        ;
+                        Crud.insertaEmpleado();
                         break;
                     case 11:
-                        ;
+                        Crud.actualizaEmpleado();
                         break;
                     case 12:
-                        ;
+                        System.out.println("A continuación introduzca el ID del empleado que quiere eliminar:");
+                        empleadoEliminado = scannerForBigInts.nextInt();
+                        IDEmpleadoEliminado= BigInteger.valueOf(empleadoEliminado);
+                        Crud.eliminaEmpleado(IDEmpleadoEliminado);
                         break;
                     case 13:
-                        ;
+                        Crud.consultaSalarios(Constants.QUERY_SELECT_AP8);
                         break;
                     case 14:
-                        ;
+                        Crud.consultaDepartamentos(Constants.QUERY_SELECT_AP6, Constants.QUERY_SELECT_AP7);
                         break;
                     case 15:
                         HibernateUtil.shutdown();

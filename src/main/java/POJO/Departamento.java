@@ -4,6 +4,15 @@ import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Set;
 
+/**
+ *
+ * @author
+ * Rafa Narvaiza
+ * ADTO03
+ *
+ * POJO declarando el objeto Departamento
+ */
+
 @Entity
 @Table(name = "DEPARTAMENTOS")
 public class Departamento {
